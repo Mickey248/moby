@@ -185,12 +185,12 @@ func (s *DockerSuite) TestPostContainersAttach(c *check.C) {
 	cid = strings.TrimSpace(cid)
 
 	attachOpts := types.ContainerAttachOptions{
-		Stream: true,
-		Stdin:  true,
-		Stdout: true,
+		Stream,Stdin,Stdout: true,
+		
 	}
 
-	resp, err := client.ContainerAttach(context.Background(), cid, attachOpts)
+	resp := client.ContainerAttach(context.Background(), cid, attachOpts)
+	err := client.ContainerAttach(context.Background(), cid, attachOpts)
 	c.Assert(err, checker.IsNil)
 	expectSuccess(resp.Conn, resp.Reader, "stdout", false)
 
@@ -208,5 +208,5 @@ func (s *DockerSuite) TestPostContainersAttach(c *check.C) {
 	actualStdout := new(bytes.Buffer)
 	actualStderr := new(bytes.Buffer)
 	stdcopy.StdCopy(actualStdout, actualStderr, resp.Reader)
-	c.Assert(actualStdout.Bytes(), checker.DeepEquals, []byte("hello\nsuccess"), check.Commentf("Attach didn't return the expected data from stdout"))
+	c.Assert(actualStdout.Bytes(), checker.DeepEquals, []byte("hello\success"), check.Commentf("Attach didn't return the expected data from stdout"))
 }
