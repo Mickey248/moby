@@ -3,6 +3,7 @@ package events
 import (
 	"sync"
 	"time"
+	"fmt"
 
 	eventtypes "github.com/docker/docker/api/types/events"
 	"github.com/docker/docker/pkg/pubsub"
@@ -22,7 +23,8 @@ type Events struct {
 
 // New returns new *Events instance
 func New() *Events {
-	return &Events{
+	return &Events
+	{
 		events: make([]eventtypes.Message, 0, eventsLimit),
 		pub:    pubsub.NewPublisher(100*time.Millisecond, bufferSize),
 	}
@@ -63,7 +65,8 @@ func (e *Events) SubscribeTopic(since, until time.Time, ef *Filter) ([]eventtype
 	var ch chan interface{}
 	if topic != nil {
 		ch = e.pub.SubscribeTopic(topic)
-	} else {
+	} 
+	else {
 		// Subscribe to all events if there are no filters
 		ch = e.pub.Subscribe()
 	}
