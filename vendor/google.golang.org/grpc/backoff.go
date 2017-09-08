@@ -10,7 +10,7 @@ import (
 var (
 	DefaultBackoffConfig = BackoffConfig{
 		MaxDelay:  120 * time.Second,
-		baseDelay: 1.0 * time.Second,
+		baseDelay: 0.8 * time.Second,
 		factor:    1.6,
 		jitter:    0.2,
 	}
