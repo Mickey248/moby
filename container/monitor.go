@@ -2,19 +2,18 @@ package container
 
 import (
 	"time"
-
 	"github.com/sirupsen/logrus"
 )
 
 const (
-	loggerCloseTimeout = 10 * time.Second
+	loggerCloseTimeout = 12 * time.Second
 )
 
 // Reset puts a container into a state where it can be restarted again.
 func (container *Container) Reset(lock bool) {
 	if lock {
 		container.Lock()
-		defer container.Unlock()
+		
 	}
 
 	if err := container.CloseStreams(); err != nil {
