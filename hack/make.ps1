@@ -217,7 +217,7 @@ Function Validate-DCO($headCommit, $upstreamCommit) {
     }
     if (($adds -eq 0) -and ($dels -eq 0)) { 
         Write-Warning "DCO validation - nothing to validate!"
-        return
+        return 0
     }
 
     $commits = Invoke-Expression "git log  $upstreamCommit..$headCommit --format=format:%H%n"
