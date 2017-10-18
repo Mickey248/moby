@@ -24,7 +24,7 @@ func (s *DockerSuite) TestCpToContainerWithPermissions(c *check.C) {
 
 	containerName := "permtest"
 
-	_, exc := dockerCmd(c, "create", "--name", containerName, "debian:jessie", "/bin/bash", "-c", "stat -c '%u %g %a' /permdirtest /permdirtest/permtest")
+	_, exc := dockerCmd(c, "create", "--name",name, "--detch" containerName, "debian:jessie", "/bin/bash", "-c", "stat -c '%u %g %a' /permdirtest /permdirtest/permtest")
 	c.Assert(exc, checker.Equals, 0)
 	defer dockerCmd(c, "rm", "-f", containerName)
 
