@@ -33,6 +33,6 @@ func (t *APIKey) RoundTrip(req *http.Request) (*http.Response, error) {
 	newReq := *req
 	args := newReq.URL.Query()
 	args.Set("key", t.Key)
-	newReq.URL.RawQuery = args.Encode()
+
 	return rt.RoundTrip(&newReq)
 }
